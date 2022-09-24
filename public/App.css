@@ -1,0 +1,69 @@
+.occupied {
+    width: 40px;
+    height: 25px;
+    background-color: rgba(255, 0, 0, 0.3);
+    transform: rotate(90deg);
+
+}
+
+.unoccupied {
+    width: 40px;
+    height: 25px;
+    background-color: white;
+    transform: rotate(90deg);
+}
+
+.occupiedLegend{
+    width: 40px;
+    height: 25px;
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.unoccupiedLegend{
+    width: 40px;
+    height: 25px;
+    background-color: white;
+}
+
+.freeSeats{
+    transform: rotate(270deg);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -200px;
+}
+.legend{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10px;
+}
+
+#countFreeSeats{
+    text-align: center;
+}
+
+.seatTable{
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+h4{
+    margin-top: -150px;
+    text-align: center;
+}
+p{
+    text-align:center;
+}
+
+form{
+    text-align:center;
+}
+#buttonNav{
+    text-align:center;
+}
