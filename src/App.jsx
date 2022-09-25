@@ -115,9 +115,18 @@ class Add extends React.Component {
     e.preventDefault();
     /*Q4. Fetch the passenger details from the add form and call bookTraveller()*/
     const addForm = document.forms.addTraveller;
+    const travellerList = this.props.travellers;
+    const curLength = travellerList.length;
     const passenger = {
       name: addForm.travellerName.value.toLowerCase(), phone: addForm.travellerPhone.value, seatId: parseInt(addForm.seatId.value)
     };
+    const existPassengers = travellerList.filter(
+      existPassenger => {
+        return (
+          existPassenger.seatId === passenger.seatId
+        )
+      }
+    );
 
     if (!/^[A-Za-z\s]+$/.test(passenger.name)){
       alert("Please enter a valid name!");
@@ -133,6 +142,11 @@ class Add extends React.Component {
       alert("Please enter a valid seatId (between 0 inclusive and " + totalSeats.toString() + " exclusive.");
       return;
     }
+
+    if (existPassengers.length > 0) {
+      alert("There is an existing reservation associated with that seat Id. Please choose another one.");
+      return;
+    }
     this.props.bookTraveller(passenger);
     addForm.travellerName.value = "";
     addForm.travellerPhone.value = "";
@@ -142,6 +156,7 @@ class Add extends React.Component {
   render() {
     const travellerList = this.props.travellers;
     const seatmap = seatMapping(travellerList);
+    
     return (
       <div>
         <form name="addTraveller" onSubmit={this.handleSubmit}>
@@ -153,6 +168,7 @@ class Add extends React.Component {
         </form>
         <hr/>
         <DisplayFreeSeats seatList = {seatmap}/>
+
       </div>
     );
   }
@@ -171,6 +187,16 @@ class Delete extends React.Component {
     const passenger = {
       name: deleteForm.travellerName.value.toLowerCase(), phone: deleteForm.travellerPhone.value
     };
+    if (!/^[A-Za-z\s]+$/.test(passenger.name)){
+      alert("Please enter a valid name!");
+      return;
+    }
+
+    if(!/^[0-9]{8}$/.test(passenger.phone)){
+      alert("Please enter a valid phone (such as 80391122).");
+      return;
+    }
+
     this.props.deleteTraveller(passenger);
     deleteForm.travellerName.value = "";
     deleteForm.travellerPhone.value = "";
@@ -206,7 +232,8 @@ class Homepage extends React.Component {
         {/*Q2. Placeholder for Homepage code that shows free seats visually.*/}
         <p id='countFreeSeats'>{freeCount}</p>
       </div>
-      </>);
+      </>
+      );
 	}
 }
 
